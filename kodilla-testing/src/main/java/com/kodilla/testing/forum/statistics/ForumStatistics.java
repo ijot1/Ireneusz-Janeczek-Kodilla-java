@@ -1,6 +1,6 @@
 package com.kodilla.testing.forum.statistics;
 
-public class ForumStatistics implements Statistics {
+public class ForumStatistics {
     private Statistics statistics;
     private int usersCount;
     private int postsCount;
@@ -13,13 +13,22 @@ public class ForumStatistics implements Statistics {
         this.statistics = statistics;
     }
 
-    public void calculateAdvStatistics(Statistics statistics){
+    public void calculateAdvStatistics(Statistics statistics) {
         setUsersCount(statistics.userNames().size());
         setPostsCount(statistics.postsCount());
         setCommentsCount(statistics.commentsCount());
-        setPostsCountPerUser((double) statistics.postsCount()/statistics.userNames().size());
-        setCommentsCountPerUser((double) statistics.commentsCount()/statistics.userNames().size());
-        setCommentsCountPerPost((double) statistics.commentsCount()/ statistics.postsCount());
+
+        if (statistics.userNames().size() > 0) {
+            setPostsCountPerUser((double) statistics.postsCount() / statistics.userNames().size());
+            setCommentsCountPerUser((double) statistics.commentsCount() / statistics.userNames().size());
+        } else {
+            setPostsCountPerUser(0);
+            setCommentsCountPerUser(0);
+        }
+        if (statistics.postsCount() > 0) {
+            setCommentsCountPerPost((double) statistics.commentsCount() / statistics.postsCount());
+        } else
+            setCommentsCountPerPost(0);
     }
 
     public int getUsersCount() {
@@ -70,10 +79,10 @@ public class ForumStatistics implements Statistics {
         this.commentsCountPerPost = commentsCountPerPost;
     }
 
-    public String showStatistics(){
-        System.out.println("Users count: "+ getUsersCount());
+    public void showStatistics() {
+        System.out.println("Users count: " + getUsersCount());
         System.out.println("Posts count" + getPostsCount());
-        System.out.println("Comments count: "+ getCommentsCount());
+        System.out.println("Comments count: " + getCommentsCount());
         System.out.println("Posts count per user: " + getPostsCountPerUser());
         System.out.println("Comments count per user: " + getCommentsCountPerUser());
         System.out.println("Comments count per post " + getCommentsCountPerPost());
