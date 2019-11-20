@@ -12,7 +12,7 @@ public class PoemBeautifier {
         char[] charsOfString = string.toCharArray();
         char[] tempChar = new char[charsOfString.length];
         for (int i = 0; i < tempChar.length; i++){
-            tempChar[tempChar.length -1 - i] = charsOfString[i];
+            tempChar[tempChar.length - 1 - i] = charsOfString[i];
         }
         return valueOf(tempChar);
     }
