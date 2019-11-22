@@ -1,25 +1,31 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.beautifier.PoemDecorator;
-import com.kodilla.stream.iterate.NumbersGenerator;
-import com.kodilla.stream.lambda.ExecuteSaySomething;
-import com.kodilla.stream.lambda.ExpressionExecutor;
-import com.kodilla.stream.lambda.Processor;
-import com.kodilla.stream.lambda.SaySomething;
 
-import java.util.concurrent.Executor;
+import com.kodilla.stream.book.Book;
+import com.kodilla.stream.book.BookDirectory;
+
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+import com.kodilla.stream.person.People;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamMain {
     public static void main(String[] args) {
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-
-        String str = "Działanie poszczególnych wywołań (czyli ich kod) określamy każdorazowo poprzez użycie wyrażenia lambda.";
-        String quotStr = " This is the quotation from Kodilla's materials.";
-
-        poemBeautifier.beautify(str, String::toUpperCase);
-        poemBeautifier.beautify(str, PoemBeautifier::invertString);
-        poemBeautifier.beautify(str, PoemBeautifier::replaceChar);
-        poemBeautifier.beautify(str, (s) -> (str + quotStr));
+        Forum forum = new Forum();
+        Map<Integer, ForumUser> forumUsersResultLst = forum.getUserList().stream()
+                .filter(forumUser -> forumUser.getSex() == 'M')
+                .filter(forumUser -> LocalDate.now().getYear() - forumUser.getDateOfBirth().getYear() > 19)
+                .filter(forumUser -> forumUser.getPostsCount() > 0)
+                .collect(Collectors.toMap(forumUser -> forumUser.getUniqueId(), forumUser -> forumUser));
+        System.out.println("# users: " + forumUsersResultLst.size());
+            forumUsersResultLst.entrySet().stream()
+                    .map(f -> f.getKey() + ": " + f.getValue())
+                    .forEach(System.out::println);
     }
 }
+
+
