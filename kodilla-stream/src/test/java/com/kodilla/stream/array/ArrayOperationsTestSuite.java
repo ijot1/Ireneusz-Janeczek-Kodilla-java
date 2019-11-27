@@ -22,7 +22,7 @@ public class ArrayOperationsTestSuite {
         double average = ArrayOperations.getAverage(numbers);
 
         //Then
-        double funcAverage = sum/numbers.length;
+        double funcAverage = sum / numbers.length;
         Assert.assertEquals(funcAverage, average, 0.001);
     }
 }

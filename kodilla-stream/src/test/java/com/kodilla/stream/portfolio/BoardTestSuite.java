@@ -4,6 +4,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.util.stream.Collectors.averagingInt;
+import static java.util.stream.Collectors.toList;
 
 public class BoardTestSuite {
     private Board prepareTestData() {
@@ -78,5 +86,57 @@ public class BoardTestSuite {
         Assert.assertEquals(3, project.getTaskLists().size());
     }
 
+    @Test
+    public void testAddTaskListFindUsersTasks() {
+        //Given
+        Board project = prepareTestData();
+        //When
+        User user = new User("developer1", "John Smith");
+        List<Task> tasks = project.getTaskLists().stream()
+                .flatMap(l -> l.getTasks().stream())
+                .filter(t -> t.getAssignedUser().equals(user))
+                .collect(toList());
+        //Then
+        Assert.assertEquals(2, tasks.size());
+        Assert.assertEquals(user, tasks.get(0).getAssignedUser());
+        Assert.assertEquals(user, tasks.get(1).getAssignedUser());
+    }
 
+    @Test
+    public void testAddTaskListFindLongTasks() {
+        //Given
+        Board project = prepareTestData();
+
+        //When
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        long longTasks = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(t -> t.getCreated())
+                .filter(d -> d.compareTo(LocalDate.now().minusDays(10)) <= 0)
+                .count();
+
+        //Then
+        Assert.assertEquals(2, longTasks);
+    }
+
+    @Test
+    public void testAddTaskListAverageWorkingOnTask() {
+        //Given
+        Board project = prepareTestData();
+
+        //When
+        double av =  project.getTaskLists().stream()
+                .flatMap(t -> t.getTasks().stream())
+                .map(t -> t.getCreated().until(LocalDate.now(), DAYS))
+                .mapToLong(t -> t)
+                .average().orElse(0);
+
+        //Then
+        double avExpected = 18.75;
+        Assert.assertEquals(avExpected, av, 0.001);
+
+
+    }
 }
