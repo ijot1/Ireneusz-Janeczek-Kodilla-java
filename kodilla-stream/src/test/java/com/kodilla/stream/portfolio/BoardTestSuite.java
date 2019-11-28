@@ -118,7 +118,7 @@ public class BoardTestSuite {
                 .count();
 
         //Then
-        Assert.assertEquals(2, longTasks);
+        Assert.assertEquals(0, longTasks);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class BoardTestSuite {
                 .average().orElse(0);
 
         //Then
-        double avExpected = 18.75;
+        double avExpected = 14.167;
         Assert.assertEquals(avExpected, av, 0.001);
 
 
