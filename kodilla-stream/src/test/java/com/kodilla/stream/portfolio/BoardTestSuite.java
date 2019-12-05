@@ -4,13 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static java.util.stream.Collectors.averagingInt;
 import static java.util.stream.Collectors.toList;
 
 public class BoardTestSuite {
