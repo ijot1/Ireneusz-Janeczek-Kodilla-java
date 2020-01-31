@@ -1,16 +1,16 @@
 package com.kodilla.good.patterns.challenges;
 
 public class User {
-    public String Name;
+    public String name;
     public String surname;
 
     public User(String name, String surname) {
-        Name = name;
+        this.name = name;
         this.surname = surname;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getSurname() {
@@ -20,7 +20,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "Name='" + Name + '\'' +
+                "Name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
     }
