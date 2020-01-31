@@ -1,16 +1,16 @@
-import com.kodilla.good.patterns.challenges.MovieStore;
+import com.kodilla.good.patterns.challenges.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PatternsMain {
     public static void main(String[] args) {
-        String result = MovieStore.getMovies().entrySet().stream()
-                .flatMap(s -> s.getValue().stream())
-                .collect(Collectors.joining("!", "", ""));
+        OrderRequestRetriever orderRequestRetriever =  new OrderRequestRetriever();
+        OrderRequest orderRequest = orderRequestRetriever.retrieve();
 
-        System.out.println(result);
-
+        ProductOrderService productOrderService = new ProductOrderService(new MailService(), new ServiceOfOrders(), new Repository());
+        productOrderService.process(orderRequest);
     }
 }
