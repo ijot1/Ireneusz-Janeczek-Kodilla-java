@@ -29,6 +29,10 @@ public class FoodOrderRequest {
         return date;
     }
 
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
     @Override
     public String toString() {
         return "FoodOrderRequest{" +
