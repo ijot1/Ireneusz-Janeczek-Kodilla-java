@@ -1,4 +1,5 @@
 import com.kodilla.good.patterns.challenges.*;
+import com.kodilla.good.patterns.food.shop.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,10 +8,12 @@ import java.util.stream.Collectors;
 
 public class PatternsMain {
     public static void main(String[] args) {
-        OrderRequestRetriever orderRequestRetriever =  new OrderRequestRetriever();
-        OrderRequest orderRequest = orderRequestRetriever.retrieve();
+        FoodOrderRequestRetriever foodOrderRequestRetriever = new FoodOrderRequestRetriever();
+        FoodOrderRequest foodOrderRequest = foodOrderRequestRetriever.retrieve();
 
-        ProductOrderService productOrderService = new ProductOrderService(new MailService(), new ServiceOfOrders(), new Repository());
-        productOrderService.process(orderRequest);
+        FoodOrderService foodOrderService = new FoodOrderService(new InfoOrderFoodService(), new ServiceOfFoodOrders(), new RepositoryOfFoodOrders());
+
+        foodOrderService.processFoodOrderRequest(foodOrderRequest);
+
     }
 }

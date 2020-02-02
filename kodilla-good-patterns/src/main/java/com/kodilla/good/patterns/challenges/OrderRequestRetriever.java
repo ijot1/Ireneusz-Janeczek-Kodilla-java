@@ -2,6 +2,7 @@ package com.kodilla.good.patterns.challenges;
 
 import java.time.LocalDateTime;
 
+//Getting data to application, -> next approach: Controller
 public class OrderRequestRetriever {
     public OrderRequest retrieve() {
 
