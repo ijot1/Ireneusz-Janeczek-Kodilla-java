@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Supplier implements SupplierProcess{
     private String name;
 
+    @Override
     public FoodOrderDTO process(FoodOrderRequest foodOrderRequest) {
         Supplier supplier = foodOrderRequest.getSupplier();
         Product product = foodOrderRequest.getProduct();
