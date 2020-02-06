@@ -24,13 +24,27 @@ public class FlightService {
     }
 
     public List<Flight> findChangeFligts(String departure, String arrival, String change) {
-        List<Flight> changeToDeparture = new ArrayList<>();
-        List<Flight> arrivalToChange = new ArrayList<>();
+        //                                        "POZ",            "KTW",         "WAW");
+        List<Flight> changeFlights = new ArrayList<>();
 
-        return flights
+        changeFlights.addAll(flights
+                .stream()
+                .filter(f -> f.getDeparture().equals(change))
+                .collect(Collectors.toList()));
+
+        changeFlights.addAll(flights
                 .stream()
                 .filter(f -> f.getDeparture().equals(departure))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+
+        changeFlights.addAll(flights
+                .stream()
+                .filter(f -> {
+                    return f.getArrival().equals(arrival);
+                })
+                .collect(Collectors.toList()));
+
+        return changeFlights;
     }
 
     public FlightService() {
