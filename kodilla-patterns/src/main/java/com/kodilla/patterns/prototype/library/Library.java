@@ -2,6 +2,7 @@ package com.kodilla.patterns.prototype.library;
 
 import com.kodilla.patterns.prototype.Prototype;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -44,8 +45,13 @@ public class Library extends Prototype {
     public Library deepCopy() throws CloneNotSupportedException {
         Library clonedLibrary = (Library) super.clone();
         clonedLibrary.books = new HashSet<>();
-        for (Book theBook : books) {
-            clonedLibrary.getBooks().addAll(books);
+        List<Book> listOfBooks = new ArrayList<>(books);
+        for (int i = 0; i < listOfBooks.size(); i++) {
+            Book copiedBook = new Book(
+                    listOfBooks.get(i).title,
+                    listOfBooks.get(i).author,
+                    listOfBooks.get(i).publicationDate);
+            clonedLibrary.getBooks().add(copiedBook);
         }
         return clonedLibrary;
     }
