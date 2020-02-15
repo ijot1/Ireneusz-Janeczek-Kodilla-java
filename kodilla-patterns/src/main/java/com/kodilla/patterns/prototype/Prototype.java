@@ -1,10 +1,12 @@
 package com.kodilla.patterns.prototype;
 
 
+import com.kodilla.patterns.prototype.library.Library;
+
 public class Prototype<T> implements Cloneable {
     @Override
-    public Board clone() throws CloneNotSupportedException {
-        return (Board) super.clone();
+    public Library clone() throws CloneNotSupportedException {
+        return (Library) super.clone();
     }
 }
 
