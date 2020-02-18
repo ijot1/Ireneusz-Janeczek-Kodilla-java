@@ -14,4 +14,11 @@ public final class Sauce {
             throw new IllegalStateException("There is no such sauce in the menu");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Sauce{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

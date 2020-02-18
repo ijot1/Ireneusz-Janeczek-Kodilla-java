@@ -16,4 +16,11 @@ public final class Roll {
     public String getKind() {
         return kind;
     }
+
+    @Override
+    public String toString() {
+        return "Roll{" +
+                "kind='" + kind + '\'' +
+                '}';
+    }
 }
