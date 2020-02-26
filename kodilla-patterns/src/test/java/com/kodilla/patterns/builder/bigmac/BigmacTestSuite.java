@@ -20,6 +20,7 @@ public class BigmacTestSuite {
         //When
         int howManyIngredients = bigmac.getIngredients().size();
         String whatKindOfBun = bigmac.getBun().getKind();
+//        Class<Ingredients> ingredients = Ingredients.class;
 
         //Then
         Assert.assertEquals(4, howManyIngredients);
