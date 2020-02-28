@@ -16,6 +16,11 @@ public class Employee {
     private String lastname;
     private List<Company> companies = new ArrayList<>();
 
+    @NamedQuery(
+            name = "Employee_findByLastname",
+            query = "FROM Employee WHERE lastname = 'Kovalsky'"
+    )
+
     public Employee() {
     }
 

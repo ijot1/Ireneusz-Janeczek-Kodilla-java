@@ -10,7 +10,7 @@ import java.util.List;
 public class Product {
     private int id;
     private String name;
-    private List<Product> productList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
     public Product() {
     }
@@ -35,11 +35,10 @@ public class Product {
     @OneToMany(
             targetEntity = Item.class,
             mappedBy = "product",
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Product> getProductList() {
-        return productList;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
     private void setId(int id) {
@@ -50,7 +49,7 @@ public class Product {
         this.name = name;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 }

@@ -6,18 +6,24 @@ import com.kodilla.hibernate.invoice.Product;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class InvoiceDaoTestSuite {
+    @Autowired
     private InvoiceDao invoiceDao;
-
+    @Autowired
+    private ProductDao productDao;
+    @Autowired
+    private ItemDao itemDao;
     @Test
     public void testInvoiceDaoSave() {
         //Given
@@ -31,15 +37,25 @@ public class InvoiceDaoTestSuite {
         invoice.getItems().add(it1);
         invoice.getItems().add(it2);
         invoice.getItems().add(it3);
+        p1.getItemList().add(it1);
+        p2.getItemList().add(it2);
+        p3.getItemList().add(it3);
 
         //When
         invoiceDao.save(invoice);
+        productDao.save(p1);
+        productDao.save(p2);
+        productDao.save(p3);
+        itemDao.save(it1);
+        itemDao.save(it2);
+        itemDao.save(it3);
+
         int id = invoice.getId();
 
         //THEN
         Assert.assertNotEquals(0, 1);
 
         //CleanUp
-//        invoiceDao.deleteById(id);
+        invoiceDao.deleteById(id);
     }
 }
