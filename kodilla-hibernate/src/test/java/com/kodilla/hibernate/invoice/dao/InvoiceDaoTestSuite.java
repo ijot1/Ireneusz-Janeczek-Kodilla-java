@@ -17,6 +17,7 @@ import java.util.List;
 @SpringBootTest
 public class InvoiceDaoTestSuite {
     private InvoiceDao invoiceDao;
+
     @Test
     public void testInvoiceDaoSave() {
         //Given
@@ -41,3 +42,4 @@ public class InvoiceDaoTestSuite {
         //CleanUp
 //        invoiceDao.deleteById(id);
     }
+}
