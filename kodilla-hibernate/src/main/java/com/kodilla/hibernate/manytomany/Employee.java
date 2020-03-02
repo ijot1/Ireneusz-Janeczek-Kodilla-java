@@ -1,12 +1,15 @@
 package com.kodilla.hibernate.manytomany;
 
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Employee.findByLastname",
+        query = "FROM Employee WHERE lastname > :lastname"
+)
 
 @Entity
 @Table(name = "EMPLOYEES")
@@ -15,11 +18,6 @@ public class Employee {
     private String firstname;
     private String lastname;
     private List<Company> companies = new ArrayList<>();
-
-    @NamedQuery(
-            name = "Employee_findByLastname",
-            query = "FROM Employee WHERE lastname = 'Kovalsky'"
-    )
 
     public Employee() {
     }
