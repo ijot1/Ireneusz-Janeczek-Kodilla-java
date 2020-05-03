@@ -13,7 +13,11 @@ import java.util.List;
 @Transactional
 @Repository
 public interface CompanyDao extends CrudRepository<Company, Integer> {
+    List<Company> findByNameContaining(String arg);
 
     @Query
     List<Company> findByCompanyNameStartingWith(@Param("param") String param);
+
+    @Query
+    List<Company> findByCompanyNameSample(@Param("sample") String sample);
 }

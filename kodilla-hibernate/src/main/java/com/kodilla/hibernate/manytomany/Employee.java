@@ -6,10 +6,18 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(
-        name = "Employee.findByLastname",
-        query = "FROM Employee WHERE lastname > :lastname"
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "Employee.findByLastname",
+                query = "FROM Employee WHERE lastname > :lastname"
+        ),
+        @NamedQuery(
+                name = "Employee.findByLastnameSample",
+                query = "FROM Employee WHERE lastname LIKE :sample"
+        )
+})
+
+
 
 @Entity
 @Table(name = "EMPLOYEES")

@@ -12,7 +12,11 @@ import java.util.List;
 @Transactional
 @Repository
 public interface EmployeeDao extends CrudRepository<Employee, Integer> {
+    List<Employee> findByLastnameContaining(String arg);
 
     @Query
     List<Employee> findByLastname(@Param("lastname") String lastname);
+
+    @Query
+    List<Employee> findByLastnameSample(@Param("sample") String sample);
 }
