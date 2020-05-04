@@ -106,6 +106,7 @@ public class PizzaOrderTestSuite {
         theOrder = new PizzaOlivesDecorator(theOrder);
         theOrder = new PizzaMushroomsDecorator(theOrder);
         theOrder = new PizzaMeatDecorator(theOrder);
+        System.out.println(theOrder.getPrice());
         //When
         BigDecimal calculatedPrice = theOrder.getPrice();
         //Then
@@ -119,6 +120,7 @@ public class PizzaOrderTestSuite {
         theOrder = new PizzaOlivesDecorator(theOrder);
         theOrder = new PizzaMushroomsDecorator(theOrder);
         theOrder = new PizzaMeatDecorator(theOrder);
+        System.out.println(theOrder.getDescription());
         //When
         String description = theOrder.getDescription();
         //Then

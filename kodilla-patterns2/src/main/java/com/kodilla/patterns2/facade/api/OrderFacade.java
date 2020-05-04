@@ -4,6 +4,7 @@ import com.kodilla.patterns2.facade.ShopService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -11,12 +12,13 @@ import java.math.BigDecimal;
 import static com.kodilla.patterns2.facade.api.OrderProcessingException.ERR_NOT_AUTHORISED;
 
 @Service
+@EnableAspectJAutoProxy
 public class OrderFacade {
     @Autowired
     private ShopService shopService;
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderFacade.class);
 
-    public void processOrder(final OrderDto orderDto, final Long userId)
+    public void processOrder(OrderDto orderDto, Long userId)
             throws OrderProcessingException {
         boolean wasError = false;
         long orderId = shopService.openOrder(userId);
